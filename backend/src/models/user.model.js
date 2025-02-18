@@ -7,15 +7,15 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      validate: {
-        validator: function (value) {
-          return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[_@]).{8,}$/.test(
-            value
-          );
-        },
-        message:
-          "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit and one special character (_ or @).",
-      },
+      // validate: {
+      //   validator: function (value) {
+      //     return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[_@]).{8,}$/.test(
+      //       value
+      //     );
+      //   },
+      //   message:
+      //     "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one digit and one special character (_ or @).",
+      // },
     },
     profilePic: { type: String, default: "" },
     delete_type: { type: Number, default: 0 },
@@ -36,7 +36,7 @@ userSchema.methods.restoreUser = async function () {
   await this.save();
 };
 
-userSchema.static.methods.findActiveUser = async function (userId) {
+userSchema.methods.findActiveUser = async function (userId) {
   return await this.findOne({ _id: userId, delete_type: 0 });
 };
 
