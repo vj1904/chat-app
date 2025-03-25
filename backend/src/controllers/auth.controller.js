@@ -23,8 +23,8 @@ export const signup = async (req, res) => {
 
     // generate the auth token if new user is created
     if (newUser) {
-      genrateJwtToken(newUser._id, res);
       await newUser.save();
+      genrateJwtToken(newUser._id, res);
 
       res.status(201).json({
         userId: newUser._id,
@@ -51,22 +51,21 @@ export const signup = async (req, res) => {
 };
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  // console.log(email, password);
   try {
     const user = await User.findOne({ email });
     console.log(user.name);
     if (!user) {
-      res.status(400).json({ message: "Invalid credentials." });
+      return res.status(400).json({ message: "Invalid credentials." });
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
-      res.status(400).json({ message: "Invalid credentials." });
+      return res.status(400).json({ message: "Invalid credentials." });
     }
 
     genrateJwtToken(user._id, res);
 
-    res.status(201).json({
+    res.status(200).json({
       userId: user._id,
       fullname: user.fullname,
       email: user.email,

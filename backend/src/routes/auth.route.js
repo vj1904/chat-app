@@ -16,7 +16,7 @@ router.post("/login", login);
 
 router.post("/logout", logout);
 
-router.put("/updateProfile", protectedRoute, updateProfile);
+router.put("/update-profile", protectedRoute, updateProfile);
 
 router.get("/check", protectedRoute, checkAuth);
 

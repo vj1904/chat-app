@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
     delete_type: { type: Number, default: 0 },
     deletedAt: { type: Date, default: null },
   },
-  { Timestamps: true }
+  { timestamps: true }
 );
 
 userSchema.methods.softDelete = async function () {
