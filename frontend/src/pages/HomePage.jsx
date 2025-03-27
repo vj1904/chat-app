@@ -3,9 +3,11 @@ import { useChatStore } from "../store/useChatStore.js";
 import Sidebar from "../components/Sidebar.jsx";
 import NoChatSelected from "../components/NoChatSelected.jsx";
 import ChatContainer from "../components/ChatContainer.jsx";
+import { useAuthStore } from "../store/useAuthStore.js";
 
 const HomePage = () => {
   const { selectedUser } = useChatStore();
+  const { onlineUsers } = useAuthStore();
   return (
     <div className="h-screen bg-base-200">
       <div className="flex items-center justify-center pt-20 px-4">
